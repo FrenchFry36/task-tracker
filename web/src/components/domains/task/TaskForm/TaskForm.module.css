@@ -1,0 +1,41 @@
+.formWrapper {
+  background-color: var(--light-grey);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: right;
+  padding: 40px;
+  gap: 10px;
+  border-radius: 10px;
+  margin: 50px;
+}
+
+.fieldsetStyle {
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  gap: 40px;
+}
+
+.taskLabelStyle {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskInputStyle {
+  border-radius: 7px;
+  border: 2px solid black;
+  padding: 5px;
+  margin-top: 7px;
+}
+
+.formButton {
+  text-align: center;
+  border-radius: 15px;
+  width: fit-content;
+  padding: 5px;
+  background-color: var(--light-blue);
+  margin-top: 10px;
+  padding: 10px;
+}

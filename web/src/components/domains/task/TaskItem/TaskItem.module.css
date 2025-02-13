@@ -21,6 +21,7 @@
 .priority {
   text-align: center;
   border-radius: 15px;
+  background-color: var(--light-blue);
   width: fit-content;
   padding: 5px;
 }
