@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import styles from './TaskForm.module.css';
+import { usePostData } from '../../../../hooks/usePostData';
 
 function TaskForm() {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskProject, setTaskProject] = useState('');
+  const { error, data, fetchData } = usePostData('tasks');
 
   function submitTask() {
     if (!taskTitle.trim() || !taskProject.trim()) {
@@ -19,10 +21,7 @@ function TaskForm() {
       projectName: taskProject,
     };
 
-    const response = fetch('/api/tasks', {
-      method: 'POST',
-      body: JSON.stringify(newTask),
-    });
+    fetchData(newTask);
 
     setTaskTitle('');
     setTaskProject('');
