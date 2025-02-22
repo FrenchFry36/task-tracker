@@ -14,7 +14,7 @@ export function LeftPane() {
           Task manager
         </NavLink>
         <p>Project view</p>
-        <NavLink to="/tasks/new-task" end>
+        <NavLink to="/new-task" end>
           Add a task
         </NavLink>
       </div>

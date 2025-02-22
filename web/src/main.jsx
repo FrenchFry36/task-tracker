@@ -17,7 +17,6 @@ createRoot(document.getElementById('root')).render(
         </Route>
         <Route path="/tasks" element={<TaskLayout />}>
           <Route index element={<App />} />
-          <Route path="new-task" element={<TaskForm />} />
         </Route>
         <Route path="/new-task" element={<TaskLayout />}>
           <Route index element={<TaskForm />} />
