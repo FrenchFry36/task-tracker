@@ -29,5 +29,5 @@ TaskList.propTypes = {
       assignedTo: PropTypes.string.isRequired,
       projectName: PropTypes.string.isRequired,
     }),
-  ).isRequired,
+  ),
 };

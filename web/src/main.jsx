@@ -36,9 +36,9 @@ enableMocking().then(() => {
           </Route>
           <Route path="/new-task" element={<TaskLayout />}>
             <Route index element={<TaskForm />} />
-            <Route path="/datafetching" element={<DataFetchingDemoPage />} />
-            <Route path="*" element={<h1>Not Found</h1>} />
           </Route>
+          <Route path="datafetching" element={<DataFetchingDemoPage />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </BrowserRouter>
     </StrictMode>,

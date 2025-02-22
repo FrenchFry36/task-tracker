@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import styles from './TaskForm.module.css';
-import { PropTypes } from 'prop-types';
 
-function TaskForm({ handleClick }) {
+function TaskForm() {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskProject, setTaskProject] = useState('');
 
@@ -20,7 +19,11 @@ function TaskForm({ handleClick }) {
       projectName: taskProject,
     };
 
-    handleClick(newTask);
+    const response = fetch('/api/tasks', {
+      method: 'POST',
+      body: JSON.stringify(newTask),
+    });
+
     setTaskTitle('');
     setTaskProject('');
   }
@@ -66,7 +69,3 @@ function TaskForm({ handleClick }) {
 }
 
 export { TaskForm };
-
-TaskForm.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-};
