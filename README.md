@@ -37,3 +37,12 @@ In week 1 we focus on creating components. Please open the folder <strong>/web/s
 <li>TaskList: Multiple task items, each in a row, using the <TaskItem /> component
 </ol>
 </details>
+<details>
+<summary>Tasks for <strong>Week 2</strong></summary>
+In week 2 we focus on building a base form. This week you need to create the components from scratch by yourself.
+<ol>
+<li>Create a new component that stores two input fields (Task name and Task Description, and add a button</li>
+<li>Use this component in App.jsx, below the TaskList you created last week.</li>
+<li>when the button is clicked, a new task should be added into the task list, without refreshing.
+</ol>
+</details>
