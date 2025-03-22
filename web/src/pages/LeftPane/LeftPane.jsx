@@ -17,6 +17,9 @@ export function LeftPane() {
         <NavLink to="/new-task" end>
           Add a task
         </NavLink>
+        <NavLink to="/login" end>
+          Login
+        </NavLink>
       </div>
     </div>
   );

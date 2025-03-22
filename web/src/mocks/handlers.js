@@ -40,6 +40,38 @@ export const handlers = [
       headers: { 'Content-Type': 'application/json' },
     });
   }),
+  http.post('/api/login', async ({ request }) => {
+    const credentials = await request.json();
+
+    // Demo user credentials
+    if (
+      credentials.username === 'demo' &&
+      credentials.password === 'password123'
+    ) {
+      return new HttpResponse(
+        JSON.stringify({
+          success: true,
+          username: 'demo',
+          name: 'Demo User',
+        }),
+        {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        },
+      );
+    }
+
+    return new HttpResponse(
+      JSON.stringify({
+        success: false,
+        message: 'Invalid username or password',
+      }),
+      {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      },
+    );
+  }),
   http.post('/api/tasks', async ({ request }) => {
     const task = await request.json();
 

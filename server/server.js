@@ -62,6 +62,25 @@ app.delete("/tasks/:id", (req, res) => {
   }
 });
 
+// Login endpoint
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  // Simple demo user validation
+  if (username === "demo" && password === "password123") {
+    res.json({
+      success: true,
+      username: "demo",
+      name: "Demo User",
+    });
+  } else {
+    res.status(401).json({
+      success: false,
+      message: "Invalid username or password",
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

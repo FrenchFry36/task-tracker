@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import { DataFetchingDemoPage } from './pages/DataFetchingDemoPage.jsx';
 import { TaskLayout } from './pages/TaskLayout/TaskLayout.jsx';
 import { TaskForm } from './components/domains/task/TaskForm/TaskForm';
+import { Login } from './pages/Login/Login';
 
 async function enableMocking() {
   if (import.meta.env === 'development') {
@@ -36,6 +37,9 @@ enableMocking().then(() => {
           </Route>
           <Route path="/new-task" element={<TaskLayout />}>
             <Route index element={<TaskForm />} />
+          </Route>
+          <Route path="/login" element={<TaskLayout />}>
+            <Route index element={<Login />} />
           </Route>
           <Route path="datafetching" element={<DataFetchingDemoPage />} />
           <Route path="*" element={<h1>Not Found</h1>} />
