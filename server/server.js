@@ -1,16 +1,19 @@
+import bcrypt from "bcrypt";
 import express from "express";
-const app = express();
-const port = process.env.PORT || 3333;
 import { allTasks } from "./data/tasks.js";
+import { allUsers } from "./data/users.js";
+import { generateJWT } from "./utils/generateJWT.js";
 import cors from "cors";
 import { v4 as uuidv4 } from "uuid";
+
+const app = express();
+const port = process.env.PORT || 3333;
 
 // ...existing code...
 app.use(express.json());
 app.use(cors());
 
 // Read (GET) all tasks
-
 app.get("/tasks/:id", (req, res) => {
   const { id } = req.params;
   if (allTasks.has(id)) {
@@ -62,7 +65,33 @@ app.delete("/tasks/:id", (req, res) => {
   }
 });
 
-// Login endpoint
+// Signup endpoint
+app.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    if (allUsers.has(email)) {
+      res.status(400).json({ error: "User already exist!" });
+    }
+    // encrypt password before storing it in db
+    const salt = await bcrypt.genSalt(10);
+    const bcryptPassword = await bcrypt.hash(password, salt);
+    // create new user object
+    const newUser = {
+      name: name,
+      email: email,
+      password: bcryptPassword,
+    };
+
+    allUsers.set(email, newUser);
+
+    const jwtToken = generateJWT(newUser.email);
+    return res.status(201).send({ jwtToken: jwtToken, isAuthenticated: true });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ error: error.message });
+  }
+});
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
