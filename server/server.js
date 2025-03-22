@@ -11,6 +11,15 @@ app.use(cors());
 
 // Read (GET) all tasks
 
+app.get("/tasks/:id", (req, res) => {
+  const { id } = req.params;
+  if (allTasks.has(id)) {
+    res.json(allTasks.get(id));
+  } else {
+    res.status(404).json({ message: "Task not found" });
+  }
+});
+
 app.get("/tasks", (req, res) => {
   res.json(Array.from(allTasks.values()));
 });
