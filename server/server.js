@@ -58,6 +58,7 @@ app.get("/tasks/:id", authenticate, (req, res) => {
 });
 
 // Read (GET) all tasks
+
 app.get("/tasks", (req, res) => {
   res.json(Array.from(allTasks.values()));
 });
@@ -82,6 +83,7 @@ app.put("/tasks/:id", (req, res) => {
 app.post("/tasks", (req, res) => {
   const newTask = {
     id: uuidv4(),
+    owner: req.user.email,
     ...req.body,
   };
   allTasks.set(newTask.id, newTask);
@@ -123,32 +125,6 @@ app.post("/signup", async (req, res) => {
 
     const jwtToken = generateJWT(newUser.email);
     return res.status(201).send({ jwtToken: jwtToken, isAuthenticated: true });
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send({ error: error.message });
-  }
-});
-app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = allUsers.get(email);
-    if (!user) {
-      return res
-        .status(401)
-        .json({ error: "Invalid User", isAuthenticated: false });
-    }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-
-    if (!isValidPassword) {
-      return res
-        .status(401)
-        .json({ error: "Invalid User", isAuthenticated: false });
-    }
-
-    const jwtToken = generateJWT(user.email);
-
-    return res.status(200).send({ jwtToken, isValidPassword: true });
   } catch (error) {
     console.error(error.message);
     return res.status(500).send({ error: error.message });
