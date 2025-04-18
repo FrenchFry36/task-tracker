@@ -10,7 +10,7 @@ export const useFetchData = (endpoint) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`/api/${endpoint}`);
+        const response = await fetch(`http://localhost:3000/${endpoint}`);
         if (!response.ok) {
           throw new Error('Something went wrong!');
         }

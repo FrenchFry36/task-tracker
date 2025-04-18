@@ -6,8 +6,11 @@ export const usePostData = (endpoint) => {
 
   const fetchData = async (newTask) => {
     try {
-      const response = fetch(`/api/${endpoint}`, {
+      const response = fetch(`http://localhost:3000/${endpoint}`, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(newTask),
       });
       if (!response.ok) {
@@ -15,6 +18,7 @@ export const usePostData = (endpoint) => {
       }
       const data = await response.json();
       setData(data);
+      return data;
     } catch (error) {
       setError(error.message);
     }

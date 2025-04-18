@@ -1,10 +1,12 @@
 import express from "express";
 import pkg from "pg";
+import cors from "cors";
 const { Pool } = pkg;
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 const db = new Pool({
   user: "saidumarakbarov", // replace with you username
@@ -39,7 +41,7 @@ app.get("/tasks/:id", function (req, res) {
 });
 
 // CREATE
-app.post("/tasks", (req, res) => {
+app.post("/new-task", (req, res) => {
   const { title, priority, release_date, assigned_to, project_name } = req.body;
 
   const insertQuery = `

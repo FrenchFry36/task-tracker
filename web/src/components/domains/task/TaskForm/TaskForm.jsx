@@ -5,9 +5,9 @@ import { usePostData } from '../../../../hooks/usePostData';
 function TaskForm() {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskProject, setTaskProject] = useState('');
-  const { error, data, fetchData } = usePostData('tasks');
+  const { error, data, fetchData } = usePostData('new-task');
 
-  function submitTask() {
+  async function submitTask() {
     if (!taskTitle.trim() || !taskProject.trim()) {
       alert('Please enter both title and project name.');
       return;
@@ -16,15 +16,21 @@ function TaskForm() {
     const newTask = {
       title: taskTitle,
       priority: 'Medium',
-      releaseDate: new Date().toLocaleDateString(),
-      assignedTo: 'Unassigned',
-      projectName: taskProject,
+      release_date: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
+      assigned_to: 'Unassigned',
+      project_name: taskProject,
     };
 
-    fetchData(newTask);
-
-    setTaskTitle('');
-    setTaskProject('');
+    try {
+      await fetchData(newTask);
+      // Clear form only on success
+      setTaskTitle('');
+      setTaskProject('');
+      alert('Task added successfully!');
+    } catch (err) {
+      console.error('Failed to add task:', err);
+      alert('Failed to add task. Please try again.');
+    }
   }
 
   return (

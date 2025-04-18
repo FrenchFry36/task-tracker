@@ -25,9 +25,9 @@ TaskList.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       priority: PropTypes.string.isRequired,
-      releaseDate: PropTypes.string.isRequired,
-      assignedTo: PropTypes.string.isRequired,
-      projectName: PropTypes.string.isRequired,
+      release_date: PropTypes.string.isRequired,
+      assigned_to: PropTypes.string.isRequired,
+      project_name: PropTypes.string.isRequired,
     }),
   ),
 };
