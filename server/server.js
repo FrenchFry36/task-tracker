@@ -18,7 +18,7 @@ app.get("/tasks", (req, res) => {
 
 // Update (PUT) a task (full update)
 
-app.put("/tasks/:id", authenticate, (req, res) => {
+app.put("/tasks/:id", (req, res) => {
   const { id } = req.params;
   const updatedTask = req.body;
 
@@ -38,7 +38,7 @@ app.put("/tasks/:id", authenticate, (req, res) => {
 
 // Create (POST) a new task
 
-app.post("/tasks", authenticate, (req, res) => {
+app.post("/tasks", (req, res) => {
   const newTask = {
     id: uuidv4(),
     owner: req.user.email,
@@ -50,7 +50,7 @@ app.post("/tasks", authenticate, (req, res) => {
 
 // Delete (DELETE) a task
 
-app.delete("/tasks/:id", authenticate, (req, res) => {
+app.delete("/tasks/:id", (req, res) => {
   const { id } = req.params;
   const task = allTasks.get(id);
   if (task) {
